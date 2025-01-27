@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 from loguru import logger
 from pydantic import BaseModel, Field
+from ..tools import ToolRegistry, Tool, ToolResponse
 
 class MemoryItem(BaseModel):
     content: str
@@ -22,6 +23,48 @@ class Memory:
         self.short_term: List[Dict[str, Any]] = []
         self.long_term: Dict[str, Any] = {}
         self.max_items = max_items
+        self.tools: Dict[str, Tool] = {}
+        self._load_default_tools()
+        
+    def _load_default_tools(self) -> None:
+        """Load all registered tools"""
+        for name, tool_cls in ToolRegistry.get_all_tools().items():
+            tool = tool_cls()
+            self.tools[name] = tool
+            logger.debug(f"Loaded tool: {name}")
+    
+    def register_tool(self, tool_name: str) -> bool:
+        """Register a specific tool by name"""
+        tool_cls = ToolRegistry.get_tool(tool_name)
+        if tool_cls:
+            self.tools[tool_name] = tool_cls()
+            logger.info(f"Registered tool in memory: {tool_name}")
+            return True
+        return False
+    
+    async def use_tool(self, tool_name: str, **kwargs) -> Any:
+        """Use a registered tool"""
+        tool = self.tools.get(tool_name)
+        if not tool:
+            raise ValueError(f"Tool not found: {tool_name}")
+        
+        result = await tool.execute(**kwargs)
+        
+        # Store tool usage in memory
+        self.store_short_term({
+            "tool": tool_name,
+            "args": kwargs,
+            "result": result
+        })
+        
+        return result
+    
+    def get_available_tools(self) -> Dict[str, Dict[str, Any]]:
+        """Get schemas for all registered tools"""
+        return {
+            name: tool.get_schema() 
+            for name, tool in self.tools.items()
+        }
         
     def store(self, key: str, value: Any, permanent: bool = False) -> None:
         """Store information in memory with timestamp."""
