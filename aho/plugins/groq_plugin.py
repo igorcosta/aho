@@ -1,8 +1,9 @@
 from typing import Dict, Any, Optional, List
 import groq
 from tenacity import retry, stop_after_attempt, wait_exponential
+from .base import BasePlugin
 
-class GroqPlugin:
+class GroqPlugin(BasePlugin):
     """
     Plugin for interacting with Groq's API services.
     Handles API calls, retry logic, and response processing.
