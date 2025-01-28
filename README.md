@@ -53,7 +53,7 @@ pip install -e ".[llm,local,dev]"
 ### Production Installation
 
 ```bash
-pip install aho-framework
+pip install aho
 ```
 
 ## Quick Start

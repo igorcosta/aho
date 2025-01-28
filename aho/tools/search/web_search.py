@@ -1,6 +1,7 @@
 from typing import Dict, Any, Optional
 import requests
 from ..base import Tool, ToolResponse
+from ..config import get_config, SearchConfig
 
 class WebSearchTool(Tool):
     """Tool for performing web searches"""
@@ -8,13 +9,12 @@ class WebSearchTool(Tool):
     description = "Search the web for information using a search engine API"
     category = "search"
     
-    def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or self._get_default_api_key()
-    
-    def _get_default_api_key(self) -> str:
-        # In practice, you'd want to load this from environment variables
-        # or a config file
-        return "YOUR_DEFAULT_API_KEY"
+    def __init__(self):
+        config = get_config("search")
+        if not isinstance(config, SearchConfig):
+            raise ValueError("Search configuration not found or invalid")
+        self.config = config
+        self.api_key = config.api_key or self._get_default_api_key()
     
     def _get_parameters_schema(self) -> Dict[str, Any]:
         return {
@@ -26,22 +26,25 @@ class WebSearchTool(Tool):
             "num_results": {
                 "type": "integer",
                 "description": "Number of results to return",
-                "default": 5,
+                "default": self.config.max_results,
                 "minimum": 1,
-                "maximum": 10
+                "maximum": 50
             }
         }
     
-    async def execute(self, query: str, num_results: int = 5) -> ToolResponse:
+    async def execute(self, query: str, num_results: Optional[int] = None) -> ToolResponse:
         """Execute a web search query"""
         try:
+            num_results = num_results or self.config.max_results
+            
             response = requests.get(
                 "https://api.search.example.com/search",
                 params={
                     "q": query,
                     "num": num_results,
                     "key": self.api_key
-                }
+                },
+                timeout=self.config.default_timeout
             )
             response.raise_for_status()
             

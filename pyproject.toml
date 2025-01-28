@@ -3,7 +3,7 @@ requires = ["setuptools>=65.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "aho-framework"
+name = "aho"
 version = "0.1.0"
 authors = [
     {name = "Your Name", email = "your.email@example.com"},
