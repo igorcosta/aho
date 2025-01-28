@@ -1,0 +1,45 @@
+name: Version Bump
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  bump-version:
+    if: ${{ contains(github.event.label.name, 'bump:') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        
+    - name: Install dependencies
+      run: pip install bump2version
+        
+    - name: Get bump type
+      id: bump-type
+      run: |
+        LABEL=${{ github.event.label.name }}
+        TYPE=${LABEL#bump:}
+        echo "type=$TYPE" >> $GITHUB_OUTPUT
+        
+    - name: Bump version
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        bump2version ${{ steps.bump-type.outputs.type }}
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.head_ref }}

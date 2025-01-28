@@ -32,11 +32,15 @@ dependencies = [
     "loguru>=0.7.2",
     "tqdm>=4.66.0",
     "typing-extensions>=4.8.0",
+    "aiohttp>=3.9.0",
+    "tenacity>=8.2.0",
 ]
 
 [project.optional-dependencies]
 llm = [
     "openai>=1.0.0",          # Official OpenAI client
+    "anthropic>=0.7.0",       # Official Anthropic client
+    "groq>=0.4.0",           # Official Groq client
     "sentence-transformers>=2.2.2",  # Local embedding models
 ]
 local = [
@@ -47,10 +51,29 @@ local = [
 dev = [
     "pytest>=7.4.0",
     "pytest-asyncio>=0.23.5",
+    "pytest-cov>=4.1.0",      # For coverage reporting
     "mypy>=1.6.0",
     "black>=23.10.0",
     "isort>=5.12.0",
     "flake8>=6.1.0",
+    "ruff>=0.1.0",           # Fast Python linter
+    "pre-commit>=3.5.0",     # Git hooks for quality checks
+    "bandit>=1.7.0",         # Security linting
+    "types-requests>=2.31.0", # Type stubs for requests
+    "types-aiohttp>=3.9.0",  # Type stubs for aiohttp
+]
+testing = [
+    "pytest-xdist>=3.3.0",   # For parallel testing
+    "pytest-sugar>=1.0.0",   # For better test progress display
+    "responses>=0.23.0",     # For mocking HTTP requests
+    "pytest-mock>=3.11.0",   # For mocking in tests
+    "aioresponses>=0.7.0",   # For mocking async HTTP requests
+]
+docs = [
+    "sphinx>=7.1.0",
+    "sphinx-rtd-theme>=1.3.0",
+    "sphinx-autodoc-typehints>=1.24.0",
+    "sphinx-copybutton>=0.5.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -59,4 +82,42 @@ exclude = [
     ".github*",
     "tests*",
     "docs*",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra -q --cov=aho --cov-report=term-missing"
+
+[tool.coverage.run]
+branch = true
+source = ["aho"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
 ]
