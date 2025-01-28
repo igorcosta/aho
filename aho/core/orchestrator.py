@@ -1,7 +1,9 @@
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 import asyncio
 import networkx as nx
+
+from aho.core.agent import BaseAgent
 
 class TaskState(BaseModel):
     id: str

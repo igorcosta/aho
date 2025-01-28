@@ -1,8 +1,11 @@
 # AHO Framework
 
-> In Te Reo Māori (Māori language), "aho" means string or cord - representing the threads that connect and weave together different components of our AI systems. Like a master weaver creating intricate patterns, AHO framework helps you orchestrate AI agents with elegance and precision.
-
-Advanced Hybrid Orchestration Framework for AI Agents - a lightweight, composable framework for building production-ready AI agents.
+<!-- [![Documentation Status](https://readthedocs.org/projects/aho-framework/badge/?version=latest)](https://aho-framework.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/aho-framework.svg)](https://badge.fury.io/py/aho-framework)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python version](https://img.shields.io/pypi/pyversions/aho-framework.svg)](https://pypi.org/project/aho-framework/)
+[![Downloads](https://pepy.tech/badge/aho-framework)](https://pepy.tech/project/aho-framework) -->
+Advanced hybrid orchestration, aka Aho for AI agents - a lightweight, composable framework for building production ready AI agents.
 
 ## Key Features
 
@@ -128,3 +131,5 @@ mypy aho/
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+> In Te Reo Māori (Māori language), "aho" means string or cord - representing the threads that connect and weave together different components of our AI systems. Like a master weaver creating intricate patterns, AHO framework helps you orchestrate AI agents with elegance and precision.

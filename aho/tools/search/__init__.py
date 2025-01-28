@@ -1,6 +1,14 @@
+from aho.tools.utils.registry import ToolRegistry
+from aho.tools.search import (
+    BingSearchTool,
+    BraveSearchTool,
+    DuckDuckGoSearchTool,
+    ExaSearchTool,
+    GoogleSearchTool
+)
 
-from .web_search import WebSearchTool
-from ..utils.registry import ToolRegistry
-
-# Register search tools
-ToolRegistry.register(WebSearchTool)
+ToolRegistry.register(BingSearchTool())
+ToolRegistry.register(BraveSearchTool())
+ToolRegistry.register(DuckDuckGoSearchTool())
+ToolRegistry.register(ExaSearchTool())
+ToolRegistry.register(GoogleSearchTool())
