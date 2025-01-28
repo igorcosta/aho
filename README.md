@@ -1,11 +1,15 @@
-# AHO Framework
+# Aho
 
 <!-- [![Documentation Status](https://readthedocs.org/projects/aho-framework/badge/?version=latest)](https://aho-framework.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/aho-framework.svg)](https://badge.fury.io/py/aho-framework)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python version](https://img.shields.io/pypi/pyversions/aho-framework.svg)](https://pypi.org/project/aho-framework/)
 [![Downloads](https://pepy.tech/badge/aho-framework)](https://pepy.tech/project/aho-framework) -->
-Advanced hybrid orchestration, aka Aho for AI agents - a lightweight, composable framework for building production ready AI agents.
+
+>[!WARNING]
+>**This is a early stage version of the Aho and is not yet suitable for production use.**
+
+Advanced hybrid orchestration, aka "Aho" is a small and powerful AI agents framework, the idea is to make it: easy to use, lightweight, composable and production ready
 
 ## Key Features
 

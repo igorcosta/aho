@@ -1,6 +1,6 @@
-# Getting Started with AHO Framework
+# Getting Started with Aho
 
-This guide demonstrates how to use the AHO Framework with Groq and basic tools.
+This guide demonstrates how to use the Aho with Groq and basic tools.
 
 ## Basic Setup
 
