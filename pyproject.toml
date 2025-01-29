@@ -6,12 +6,14 @@ build-backend = "setuptools.build_meta"
 name = "aho"
 version = "0.1.0"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "Igor Costa", email = "igorcosta@gmail.com"},
 ]
-description = "Advanced Hybrid Orchestration Framework for AI Agents"
+description = "Advanced hybrid orchestration framework for AI Agents"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
+repository = "https://github.com/igorcosta/aho"
+
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -42,6 +44,11 @@ llm = [
     "anthropic>=0.7.0",       # Official Anthropic client
     "groq>=0.4.0",           # Official Groq client
     "sentence-transformers>=2.2.2",  # Local embedding models
+]
+ollama = [
+    "ollama>=0.1.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0"
 ]
 local = [
     "transformers>=4.35.0",
@@ -121,3 +128,14 @@ exclude_lines = [
     "pass",
     "raise ImportError",
 ]
+
+[tool.pip-tools]
+generate_hashes = false
+
+[[tool.pip-tools.requirements]]
+file = "requirements.txt"
+extras = ["llm", "local"]
+
+[[tool.pip-tools.requirements]]
+file = "requirements-dev.txt"
+extras = ["dev", "testing"]

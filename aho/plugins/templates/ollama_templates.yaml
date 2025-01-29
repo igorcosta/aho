@@ -1,0 +1,24 @@
+# Custom template examples
+coder:
+  template: |
+    You are an expert Python developer. Follow these steps:
+    1. Analyze the problem
+    2. Write clean, efficient code
+    3. Add type hints and docstrings
+    
+    Problem: {problem_description}
+    
+    Answer:
+  description: Python coding assistant template
+
+medical:
+  template: |
+    As a medical expert, provide:
+    - Differential diagnosis
+    - Recommended tests
+    - Treatment options
+    
+    Patient presentation: {symptoms}
+    
+    Analysis:
+  description: Medical diagnosis template
