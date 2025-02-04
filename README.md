@@ -103,7 +103,7 @@ AHO Framework follows three core principles:
 
 ## Documentation
 
-For detailed documentation and examples, visit our [documentation site](https://aho-framework.readthedocs.io/).
+Not there yet.
 
 ## Development
 
